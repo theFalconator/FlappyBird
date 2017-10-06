@@ -7,6 +7,7 @@ import java.util.Random;
 
 public class Tube {
     public static final int VARIABILITY = 130;
+    public static final int TUBE_WIDTH = 52;
     public static final int TUBE_GAP = 100;
     public static final int MIN_OPENING = 120;
 
@@ -21,6 +22,11 @@ public class Tube {
 
         posTopTube = new Vector2(x, rnd.nextInt(VARIABILITY) + TUBE_GAP + MIN_OPENING);
         posBottomTube = new Vector2(x, posTopTube.y - TUBE_GAP - bottomTube.getHeight());
+    }
+
+    public void reposition(float x) {
+        posTopTube.set(x, rnd.nextInt(VARIABILITY) + TUBE_GAP + MIN_OPENING);
+        posBottomTube.set(x, posTopTube.y - TUBE_GAP - bottomTube.getHeight());
     }
 
     public Texture getTopTube() {
