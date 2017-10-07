@@ -24,7 +24,7 @@ public class PlayState extends State {
 
         tubes = new Array<>();
 
-        for(int i = 0; i < TUBE_COUNT; i++) {
+        for(int i = 0; i <= TUBE_COUNT; i++) {
             tubes.add(new Tube(i*TUBE_SPACING + Tube.TUBE_WIDTH));
         }
 
@@ -49,12 +49,15 @@ public class PlayState extends State {
     public void update(float dt) {
         handleInput();
         bird.update(dt);
+        cam.position.x = bird.getPosition().x + 80;
 
         for(Tube t : tubes) {
             if(cam.position.x - (cam.viewportWidth / 2) > t.getPosTopTube().x + t.getTopTube().getWidth()) {
                 t.reposition(t.getPosTopTube().x + ((Tube.TUBE_WIDTH + TUBE_SPACING) * TUBE_COUNT));
             }
         }
+
+        cam.update();
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.nfalcon.flappy.sprites;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 import java.util.Random;
@@ -15,6 +16,8 @@ public class Tube {
     private Vector2 posTopTube, posBottomTube;
     private Random rnd;
 
+    private Rectangle boundsTop, boundsBottom;
+
     public Tube(float x) {
         topTube = new Texture("toptube.png");
         bottomTube = new Texture("bottomtube.png");
@@ -22,6 +25,9 @@ public class Tube {
 
         posTopTube = new Vector2(x, rnd.nextInt(VARIABILITY) + TUBE_GAP + MIN_OPENING);
         posBottomTube = new Vector2(x, posTopTube.y - TUBE_GAP - bottomTube.getHeight());
+
+        boundsTop = new Rectangle(posTopTube.x, posTopTube.y, topTube.getWidth(), topTube.getHeight());
+        boundsBottom = new Rectangle(posBottomTube.x, posBottomTube.y, bottomTube.getWidth(), bottomTube.getHeight());
     }
 
     public void reposition(float x) {
