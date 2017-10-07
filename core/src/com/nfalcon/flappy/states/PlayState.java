@@ -4,10 +4,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Array;
 import com.nfalcon.flappy.FlappyDemo;
 import com.nfalcon.flappy.sprites.Bird;
 import com.nfalcon.flappy.sprites.Tube;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PlayState extends State {
     private static final int TUBE_SPACING = 125;
@@ -15,23 +17,22 @@ public class PlayState extends State {
     private static final int GROUND_OFFSET = -30;
 
     private Bird bird;
-    private Tube tube;
 
     private Texture bg;
     private Texture ground;
 
     private Vector2 groundPos1, groundPos2;
 
-    private Array<Tube> tubes;
+    private List<Tube> tubes;
 
     public PlayState(GameStateManager gsm) {
         super(gsm);
         bird = new Bird(50, 250);
 
-        tubes = new Array<>();
+        tubes = new ArrayList<Tube>();
 
-        for (int i = 0; i <= TUBE_COUNT; i++) {
-            tubes.add(new Tube(i * TUBE_SPACING + 2 * Tube.TUBE_WIDTH));
+        for (int i = 1; i <= TUBE_COUNT; i++) {
+            tubes.add(new Tube(i * (TUBE_SPACING + Tube.TUBE_WIDTH)));
         }
 
         bg = new Texture("bg.png");
