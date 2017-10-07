@@ -33,6 +33,13 @@ public class Tube {
     public void reposition(float x) {
         posTopTube.set(x, rnd.nextInt(VARIABILITY) + TUBE_GAP + MIN_OPENING);
         posBottomTube.set(x, posTopTube.y - TUBE_GAP - bottomTube.getHeight());
+
+        boundsTop.setPosition(posTopTube.x, posTopTube.y);
+        boundsBottom.setPosition(posBottomTube.x, posBottomTube.y);
+    }
+
+    public boolean collides(Rectangle player) {
+        return player.overlaps(boundsBottom) || player.overlaps(boundsTop);
     }
 
     public Texture getTopTube() {
