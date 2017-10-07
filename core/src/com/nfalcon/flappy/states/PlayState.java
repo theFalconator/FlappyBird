@@ -11,6 +11,7 @@ import com.nfalcon.flappy.sprites.Tube;
 public class PlayState extends State {
     private static final int TUBE_SPACING = 125;
     public static final int TUBE_COUNT = 4;
+
     private Bird bird;
     private Tube tube;
 
@@ -25,7 +26,7 @@ public class PlayState extends State {
         tubes = new Array<>();
 
         for(int i = 0; i <= TUBE_COUNT; i++) {
-            tubes.add(new Tube(i*TUBE_SPACING + Tube.TUBE_WIDTH));
+            tubes.add(new Tube(i*TUBE_SPACING + 2*Tube.TUBE_WIDTH));
         }
 
         bg = new Texture("bg.png");
@@ -34,7 +35,9 @@ public class PlayState extends State {
 
     @Override
     public void dispose() {
-
+        bg.dispose();
+        bird.dispose();
+        for(Tube t : tubes) { t.dispose(); }
     }
 
     @Override
@@ -54,6 +57,7 @@ public class PlayState extends State {
         for(Tube t : tubes) {
             if(t.collides(bird.getBounds())) {
                 gsm.set(new PlayState(gsm));
+                break;
             }
             if(cam.position.x - (cam.viewportWidth / 2) > t.getPosTopTube().x + t.getTopTube().getWidth()) {
                 t.reposition(t.getPosTopTube().x + ((Tube.TUBE_WIDTH + TUBE_SPACING) * TUBE_COUNT));

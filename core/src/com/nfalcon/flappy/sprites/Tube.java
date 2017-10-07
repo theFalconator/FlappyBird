@@ -57,4 +57,9 @@ public class Tube {
     public Vector2 getPosBottomTube() {
         return posBottomTube;
     }
+
+    public void dispose() {
+        bottomTube.dispose();
+        topTube.dispose();
+    }
 }
