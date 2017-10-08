@@ -71,6 +71,7 @@ public class PlayState extends State {
         for (Tube t : tubes) {
             if (t.collides(bird.getBounds())) {
                 gsm.set(new PlayState(gsm));
+                System.out.println("Bird collided with tube.");
                 break;
             }
             if (cam.position.x - (cam.viewportWidth / 2) > t.getPosTopTube().x + t.getTopTube().getWidth()) {
@@ -80,6 +81,7 @@ public class PlayState extends State {
 
         if (bird.getPosition().y <= ground.getHeight() + GROUND_OFFSET) {
             gsm.set(new PlayState(gsm));
+            System.out.println("Bird hit the ground.");
         }
 
         cam.update();
